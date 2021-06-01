@@ -35,18 +35,18 @@ $ heroku open
 
 ## Use case
 
-Once the app is deployed you can visit the index page at ```https://{you_domain_here}/```  
+Once the app is deployed you can visit the index page at ```https://{your_domain_here}/```  
 On the index page there are 2 buttons referring to ```/securedPage1``` and ```/securedPage2```  
 These pages are protected and only accessible after successful authorization via salesforce org.  
 Once you are authorized it is possible to visit a special page ```/loginSuccess``` to get the username specified on the salesforce org.  
 
 Steps:
-1. Go to https://{you_domain_here}/
+1. Go to https://{your_domain_here}/
 2. Click ```Page 1```
 3. Click ```Login with Yocova```
 4. Pass authorization on https://yocova.com domain
-5. Find ```https://{you_domain_here}/securedPage1``` opened
-6. Goto ```https://{you_domain_here}/loginSuccess```
+5. Find ```https://{your_domain_here}/securedPage1``` opened
+6. Goto ```https://{your_domain_here}/loginSuccess```
 7. Find Welcome page with you Yocova account username specified.
 
 ## Documentation
