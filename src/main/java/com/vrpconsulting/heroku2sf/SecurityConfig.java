@@ -1,5 +1,6 @@
 package com.vrpconsulting.heroku2sf;
 
+import java.util.Set;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -17,8 +18,6 @@ import org.springframework.security.oauth2.client.web.HttpSessionOAuth2Authoriza
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
-import java.util.Set;
-
 @Configuration
 @PropertySource("classpath:application-oauth2.properties")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,29 +25,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure( final HttpSecurity http ) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/oauth_login",
-                         "/loginFailure",
-                         "/",
-                         "/webjars/**",
-                         "/favicon.ico",
-                         "/static/**")
-            .permitAll()
-            .anyRequest()
-            .authenticated()
+                .antMatchers("/oauth_login",
+                             "/loginFailure",
+                             "/",
+                             "/webjars/**",
+                             "/favicon.ico",
+                             "/static/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
             .and()
-            .sessionManagement().sessionCreationPolicy( SessionCreationPolicy.IF_REQUIRED )
+                .sessionManagement()
+                .sessionCreationPolicy( SessionCreationPolicy.IF_REQUIRED )
             .and()
-            .oauth2Login()
-            .loginPage("/oauth_login")
-            .authorizationEndpoint()
-            .baseUri( "/oauth2/authorize-client" )
-            .authorizationRequestRepository( authorizationRequestRepository() )
+                .oauth2Login()
+                .loginPage("/oauth_login")
+                .authorizationEndpoint()
+                .baseUri( "/oauth2/authorize-client" )
+                .authorizationRequestRepository( authorizationRequestRepository() )
             .and()
-            .tokenEndpoint()
-            .accessTokenResponseClient( accessTokenResponseClient() )
+                .tokenEndpoint()
+                .accessTokenResponseClient( accessTokenResponseClient() )
             .and()
-            .defaultSuccessUrl( "/loginSuccess" )
-            .failureUrl( "/loginFailure" );
+                .defaultSuccessUrl( "/loginSuccess" )
+                .failureUrl( "/loginFailure" )
+            .and()
+                .logout()
+                .logoutUrl( "/logout" )
+                .logoutSuccessUrl("/");
     }
     
     @Bean
